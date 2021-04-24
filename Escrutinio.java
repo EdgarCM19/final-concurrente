@@ -10,11 +10,10 @@ public class Escrutinio implements Proceso {
 
     public Escrutinio(CanalSimple entrada, CanalSimple salida){
         MsgAdm msg = (MsgAdm)entrada.receive();
-        int numerGanador = msg.numero;
-        for(int i = 0; i < msg.jugadores.lenght; i++){
-            if(msg.jugadores[i].dato == numerGanador)
+        int numeroGanador = msg.numero;
+        for(int i = 0; i < msg.jugadores.lenght; i++)
+            if(msg.jugadores[i].dato == numeroGanador)
                 msg.jugadores[i].ganador();
-        }
         guardarArchivo(msg.jugadores);
         salida.send(msg);
     }
@@ -23,9 +22,8 @@ public class Escrutinio implements Proceso {
         final String fileName = "resultados.txt";
         File file = new File(fileName);
         StringBuffer cad = new StringBuffer("");
-        if(file.exists() && file.isDirectory()){
+        if(file.exists() && file.isDirectory())
             cad.append("| t1 |\t| 2 |\t| 3 |\t| 4 |\t| 5 |\t| 6 |\t| 7 |\t| 8 |\t| 9 |\t| 10 |\n");
-        }
         for(int i = 0; i < jugadores.lenght; i++)
             cad.append(((jugadores[i].ganador) ? "| G |" : "| P |") + "\t");
         cad.append("\n");
