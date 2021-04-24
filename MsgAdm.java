@@ -9,4 +9,5 @@ public class MsgAdm {
     }
     
     //Hola jeje xd
+    //Algo antes de actualizar
 }
