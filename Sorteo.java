@@ -11,8 +11,8 @@ public class Sorteo implements Proceso {
     public void run(){
         while(true){
             Random rnd = new Random();
-            n=(int) (rnd.nextDouble() * 21 + 1);
-            salida.send(n);
+            ganador = (int) rnd.nextInt(20) + 1;
+            salida.send(ganador);
         }
     }
 }

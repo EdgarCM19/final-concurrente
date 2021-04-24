@@ -16,12 +16,13 @@ public class Jugador implements Proceso {
         Random rnd = new Random();
         int n=0;
         while(true){
-            n=(int) (rnd.nextDouble() * 21 + 1);
+            n=(int) rnd.nextInt(20) + 1;
             msg=new MsgJugador(id,n);
             salida.send(msg);
             msg=(MsgJugador)entrada.receive();
-            String cad = (msg.ganador ) ? "Yeii Gane !!!" : "F.. Perdi !!!";
-            System.out.println("[Jugador "+id+"]:>"+cad);
+            // String cad = ;
+            System.out.println("[Jugador "+id+"]:>" + 
+                    ((msg.ganador ) ? "Yeii Gane !!!" : "F.. Perdi !!!"));
         }
     }
 
