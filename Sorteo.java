@@ -14,5 +14,6 @@ public class Sorteo implements Proceso {
             n=(int) (rnd.nextDouble() * 21 + 1);
             salida.send(n);
         }
+        //se ve?
     }
 }
