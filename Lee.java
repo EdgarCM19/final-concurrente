@@ -13,5 +13,6 @@ public class Lee implements Proceso {
 
    	public void run() {
 	  	msg = (MsgJugador)canal_in.receive();
+		System.out.println("[Administracion]>Recibi el numero elegido del jugador: " + this.msg.id);
    	}
 }

@@ -9,24 +9,29 @@ public class Escrutinio implements Proceso {
     public CanalSimple entrada, salida;
 
     public Escrutinio(CanalSimple entrada, CanalSimple salida){
-        while(true){
+        this.entrada = entrada;
+        this.salida = salida;
+    }
+
+    public void run(){
+        // while(true){
             MsgAdm msg = (MsgAdm)entrada.receive();
             int numeroGanador = msg.numero;
-            for(int i = 0; i < msg.jugadores.lenght; i++)
+            for(int i = 0; i < msg.jugadores.length; i++)
                 if(msg.jugadores[i].dato == numeroGanador)
                     msg.jugadores[i].ganador();
             guardarArchivo(msg.jugadores);
             salida.send(msg);
-        }
+        // }
     }
 
     private void guardarArchivo(MsgJugador [] jugadores){
         final String fileName = "resultados.txt";
         File file = new File(fileName);
         StringBuffer cad = new StringBuffer("");
-        if(file.exists() && file.isDirectory())
-            cad.append("| t1 |\t| 2 |\t| 3 |\t| 4 |\t| 5 |\t| 6 |\t| 7 |\t| 8 |\t| 9 |\t| 10 |\n");
-        for(int i = 0; i < jugadores.lenght; i++)
+        if(!(file.exists() && !file.isDirectory()))
+            cad.append("| 1 |\t| 2 |\t| 3 |\t| 4 |\t| 5 |\t| 6 |\t| 7 |\t| 8 |\t| 9 |\t| 10 |\n");
+        for(int i = 0; i < jugadores.length; i++)
             cad.append(((jugadores[i].ganador) ? "| G |" : "| P |") + "\t");
         cad.append("\n");
         try {

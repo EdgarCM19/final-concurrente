@@ -23,23 +23,27 @@ public class Administracion implements Proceso{
     }
     public void run(){
         Lee[] l = new Lee[canal_in.length];
-        Escribe[] e = new EScribe[canal_out.length];
+        Escribe[] e = new Escribe[canal_out.length];
         
-        while(true){
+        // while(true){
+            System.out.println("--------[JUGADORES ELIGIENDO NUMEROS]--------");
             for(int i = 0; i < l.length; i++)
                 l[i] = new Lee(canal_in[i]);
             new Paralelo(l).run();
+            System.out.println("--------[ADMINISTRACION RECIBIO TODOS LOS NUMEROS]--------");
             jugadores = new MsgJugador[l.length];
             for(int i = 0; i < l.length; i++)
-                jugadores[i] = ((MsgJugador)l[i]).getMsg();
+                jugadores[i] = l[i].getMsg();
             num = (Integer)in_sorteo.receive();
+            System.out.println("[Administracion]>Se recibio de sorteo el numero ganador");
             out_escru.send(new MsgAdm(jugadores, num));
-            jugadores = (MsgJugador)in_escru.receive();
+            System.out.println("--------[ADMINISTRACION ENVIANDO RESULTADOS]--------");
+            MsgAdm respuesta = (MsgAdm)in_escru.receive();
             for(int i = 0; i < e.length; i++){
-                e[i] = new Escribe(canal_out[i],jugadores[i]);
+                e[i] = new Escribe(canal_out[i], respuesta.jugadores[i]);
             }
             new Paralelo(e).run();
-        }
+        // }
     }
     
 }

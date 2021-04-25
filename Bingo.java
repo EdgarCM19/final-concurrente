@@ -26,7 +26,8 @@ public class Bingo {
         procesos[11] = new Sorteo(sorteoOutAdm);
         procesos[12] = new Escrutinio(admOutEscru, admInEscru);
 
-        new Parelelo(procesos).run();
+        System.out.println("--------[INICIA RONDA DEL BINGO]--------");
+        new Paralelo(procesos).run();
         
     }
 
