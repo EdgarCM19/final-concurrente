@@ -37,8 +37,8 @@ public class Administracion implements Proceso{
             num = (Integer)in_sorteo.receive();
             System.out.println("[Administracion]>Se recibio de sorteo el numero ganador");
             out_escru.send(new MsgAdm(jugadores, num));
-            System.out.println("--------[ADMINISTRACION ENVIANDO RESULTADOS]--------");
             MsgAdm respuesta = (MsgAdm)in_escru.receive();
+            System.out.println("--------[ADMINISTRACION ENVIANDO RESULTADOS]--------");
             for(int i = 0; i < e.length; i++){
                 e[i] = new Escribe(canal_out[i], respuesta.jugadores[i]);
             }
