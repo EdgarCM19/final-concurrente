@@ -11,5 +11,4 @@ public class Sorteo implements Proceso {
         while(true)
             salida.send((Integer)(new Random().nextInt(20)) + 1);
     }
-    //se ve
 }
