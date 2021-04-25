@@ -20,7 +20,6 @@ public class Jugador implements Proceso {
             msg = new MsgJugador(id,n);
             salida.send(msg);
             msg = (MsgJugador)entrada.receive();
-            // String cad = ;
             System.out.println("[Jugador "+id+"]:>" + 
                     ((msg.ganador ) ? "Yeii Gane !!!" : "F.. Perdi !!!"));
         }

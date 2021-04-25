@@ -28,8 +28,6 @@ public class Administracion implements Proceso{
         while(true){
             for(int i = 0; i < l.length; i++)
                 l[i] = new Lee(canal_in[i]);
-            // Paralelo par=new Paralelo(l);
-            // par.run();
             new Paralelo(l).run();
             jugadores = new MsgJugador[l.length];
             for(int i = 0; i < l.length; i++)
@@ -41,8 +39,6 @@ public class Administracion implements Proceso{
                 e[i] = new Escribe(canal_out[i],jugadores[i]);
             }
             new Paralelo(e).run();
-            // Paralelo par2 = new Paralelo(e);
-            // par2.run();
         }
     }
     

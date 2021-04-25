@@ -9,13 +9,15 @@ public class Escrutinio implements Proceso {
     public CanalSimple entrada, salida;
 
     public Escrutinio(CanalSimple entrada, CanalSimple salida){
-        MsgAdm msg = (MsgAdm)entrada.receive();
-        int numeroGanador = msg.numero;
-        for(int i = 0; i < msg.jugadores.lenght; i++)
-            if(msg.jugadores[i].dato == numeroGanador)
-                msg.jugadores[i].ganador();
-        guardarArchivo(msg.jugadores);
-        salida.send(msg);
+        while(true){
+            MsgAdm msg = (MsgAdm)entrada.receive();
+            int numeroGanador = msg.numero;
+            for(int i = 0; i < msg.jugadores.lenght; i++)
+                if(msg.jugadores[i].dato == numeroGanador)
+                    msg.jugadores[i].ganador();
+            guardarArchivo(msg.jugadores);
+            salida.send(msg);
+        }
     }
 
     private void guardarArchivo(MsgJugador [] jugadores){
