@@ -41,8 +41,8 @@ public class Administracion implements Proceso{
             System.out.println("[Administracion]>Se recibio de sorteo el numero ganador");
             System.out.println("[Administracion]>Enviando datos a Escrutinio");
             out_escru.send(new MsgAdm(jugadores, num));
-            System.out.println("[Administracion]>Se recibio resultados enviados por  Escrutinio");
             MsgAdm respuesta = (MsgAdm)in_escru.receive();
+            System.out.println("[Administracion]>Se recibio resultados enviados por  Escrutinio");
             System.out.println("--------[ADMINISTRACION ENVIANDO RESULTADOS]--------");
             for(int i = 0; i < e.length; i++){
                 e[i] = new Escribe(canal_out[i], respuesta.jugadores[i]);
