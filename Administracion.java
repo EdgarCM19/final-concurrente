@@ -8,24 +8,27 @@ public class Administracion implements Proceso{
     public CanalSimple  canal_out[];
     public MsgJugador [] jugadores;
     public Integer num;
+    public boolean ciclo;
     
     public Administracion(CanalSimple  canal_in[],
                             CanalSimple  in_sorteo,
                             CanalSimple  out_escru,
                             CanalSimple  in_escru,
-                            CanalSimple  canal_out[]){
+                            CanalSimple  canal_out[],
+                            boolean ciclo){
 
         this.canal_in   = canal_in;
         this.in_sorteo  = in_sorteo;
         this.out_escru  = out_escru;
         this.in_escru   = in_escru;
         this.canal_out  = canal_out;
+        this.ciclo=ciclo;
     }
     public void run(){
         Lee[] l = new Lee[canal_in.length];
         Escribe[] e = new Escribe[canal_out.length];
         
-        // while(true){
+        do{
             System.out.println("--------[JUGADORES ELIGIENDO NUMEROS]--------");
             for(int i = 0; i < l.length; i++)
                 l[i] = new Lee(canal_in[i]);
@@ -43,7 +46,7 @@ public class Administracion implements Proceso{
                 e[i] = new Escribe(canal_out[i], respuesta.jugadores[i]);
             }
             new Paralelo(e).run();
-        // }
+        }while(ciclo);
     }
     
 }
