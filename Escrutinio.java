@@ -7,22 +7,26 @@ import Jpmi.*;
 public class Escrutinio implements Proceso {
     
     public CanalSimple entrada, salida;
+    public boolean ciclo;
 
-    public Escrutinio(CanalSimple entrada, CanalSimple salida){
+    public Escrutinio(CanalSimple entrada, CanalSimple salida,boolean ciclo){
         this.entrada = entrada;
         this.salida = salida;
+        this.ciclo=ciclo;
     }
 
     public void run(){
-        // while(true){
+        do{
             MsgAdm msg = (MsgAdm)entrada.receive();
+            System.out.println("[Escrutinio]>Se recibio los datos a analizar");
             int numeroGanador = msg.numero;
             for(int i = 0; i < msg.jugadores.length; i++)
                 if(msg.jugadores[i].dato == numeroGanador)
                     msg.jugadores[i].ganador();
             guardarArchivo(msg.jugadores);
+            System.out.println("[Escrutinio]>Enviando datos ya analizados");
             salida.send(msg);
-        // }
+        }while(ciclo);
     }
 
     private void guardarArchivo(MsgJugador [] jugadores){
