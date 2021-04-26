@@ -25,6 +25,9 @@ public class Jugador implements Proceso {
             msg = (MsgJugador)entrada.receive();
             System.out.println("[Jugador " + (this.id + 1) + "]:>" + 
                     ((msg.ganador ) ? "Yeii Gane !!!" : "F.. Perdi !!!"));
+            try{
+                Thread.sleep(1000);
+            }catch(InterruptedException e){}
         }while(ciclo);
     }
 }
